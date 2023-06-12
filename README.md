@@ -1,1 +1,1 @@
-# LeetCode
+# TEQ'S LEETCODE
