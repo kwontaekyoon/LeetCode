@@ -1,7 +1,5 @@
 class Solution {
     public int uniquePathsWithObstacles(int[][] map) {
-        if (map[0][0] == 1)
-            return 0;
         int r = map.length, c = map[0].length;
         int[][] dp = new int[r][c];
         for (int i = 0; i < c; i++) {
