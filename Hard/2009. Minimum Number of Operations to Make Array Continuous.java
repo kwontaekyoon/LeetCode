@@ -9,12 +9,12 @@ class Solution {
         for (int num : nums) {
             // Advance the window
             while (numsInWindow.size() > 0 && num - numsInWindow.peekFirst() >= n) {
-                numsInWindow.poll();
+                numsInWindow.pollFirst();
             }
 
             // Add the new number to the window (if it's not a duplicate)
             if (numsInWindow.size() == 0 || !numsInWindow.peekLast().equals(num)) {
-                numsInWindow.offer(num);
+                numsInWindow.offerLast(num);
             }
 
             maxNumsInWindow = Math.max(maxNumsInWindow, numsInWindow.size());
