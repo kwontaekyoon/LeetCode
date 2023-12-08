@@ -25,21 +25,12 @@ class Solution {
             return;
         }
         res.append(node.val);
-        if (node.left == null && node.right != null) {
-            res.append("()");
-            res.append("(");
-            dfs(node.right, res);
-            res.append(")");
-        }
-        if (node.left != null && node.right == null) {
+        if (node.left != null || node.right != null) {
             res.append("(");
             dfs(node.left, res);
             res.append(")");
         }
-        if (node.left != null && node.right != null) {
-            res.append("(");
-            dfs(node.left, res);
-            res.append(")");
+        if (node.right != null) {
             res.append("(");
             dfs(node.right, res);
             res.append(")");
