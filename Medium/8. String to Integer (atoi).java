@@ -8,14 +8,8 @@ class Solution {
         while (i < n && sToChars[i] == ' ') {
             i += 1;
         }
-        if (i == n) {
-            return 0;
-        }
-        if (sToChars[i] == '-') {
-            p = -1;
-            i += 1;
-        } else if (sToChars[i] == '+') {
-            p = 1;
+        if (i < n && (sToChars[i] == '-' || sToChars[i] == '+')) {
+            p = (sToChars[i] == '-') ? -1 : 1;
             i += 1;
         }
         while (i < n && sToChars[i] >= '0' && sToChars[i] <= '9') {
