@@ -1,22 +1,26 @@
 class Solution {
     private final static int MOD = (int) 1e9 + 7;
 
+    // tabulation
     public int numRollsToTarget(int n, int k, int target) {
-        // int[][] dp = new int[n + 1][target + 1];
-        // dp[0][0] = 1;
-        // for (int r = 1; r < n + 1; r++) {
-        // for (int c = r; c < target + 1; c++) {
-        // for (int num = 1; num < k + 1; num++) {
-        // if (c - num > -1) {
-        // dp[r][c] = (dp[r][c] + dp[r - 1][c - num]) % MOD;
-        // }
-        // }
-        // if (dp[r][c] == 0) {
-        // break;
-        // }
-        // }
-        // }
-        // return dp[n][target];
+        int[][] dp = new int[n + 1][target + 1];
+        dp[0][0] = 1; // 0 dice = 0
+        // from using one dice
+        for (int dice = 1; dice < n + 1; dice++) {
+            // from when sum is min (numOfDice * 1)
+            for (int sum = dice; sum < Math.min(target, dice * k) + 1; sum++) {
+                for (int num = 1; num < k + 1; num++) {
+                    if (sum - num > -1) {
+                        dp[dice][sum] = (dp[dice - 1][sum - num] + dp[dice][sum]) % MOD;
+                    }
+                }
+            }
+        }
+        return dp[n][target];
+    }
+
+    // memoziation
+    public int numRollsToTarget(int n, int k, int target) {
         int[][] dp = new int[n + 1][target + 1];
         for (int[] row : dp) {
             Arrays.fill(row, -1);
