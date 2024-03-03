@@ -37,3 +37,22 @@ class Solution {
         return head;
     }
 }
+
+class TwoPointer {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode pre = head;
+        ListNode nex = head;
+        for (int i = 0; i < n; i++) {
+            pre = pre.next;
+        }
+        if (pre == null) {
+            return nex.next;
+        }
+        while (pre.next != null) {
+            pre = pre.next;
+            nex = nex.next;
+        }
+        nex.next = nex.next.next;
+        return head;
+    }
+}
