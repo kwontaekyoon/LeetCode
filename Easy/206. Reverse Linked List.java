@@ -5,8 +5,7 @@ class Solution {
         }
         var next = curr.next;
         curr.next = prev;
-        prev = curr;
-        return recursion(next, prev);
+        return recursion(next, curr);
     }
     public ListNode reverseList(ListNode head) {
         return recursion(head, null);
