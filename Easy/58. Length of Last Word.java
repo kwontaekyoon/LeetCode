@@ -12,3 +12,10 @@ class Solution {
         return count;
     }
 }
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        var strings = s.split(" ");
+        return strings[strings.length - 1].length();
+    }
+}
