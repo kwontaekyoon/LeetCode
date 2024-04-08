@@ -1,5 +1,21 @@
 class Solution {
     public int countStudents(int[] students, int[] sandwiches) {
+        var cnt = new int[2];
+        for (var pref : students) {
+            cnt[pref]++;
+        }
+        for (var shape : sandwiches) {
+            if (cnt[shape] == 0) {
+                break;
+            }
+            cnt[shape]--;
+        }
+        return cnt[0] + cnt[1];
+    }
+}
+
+class UsingQueue {
+    public int countStudents(int[] students, int[] sandwiches) {
         int n =  sandwiches.length;
         var queue = new ArrayDeque<Integer>();
         for (int s : students) {
@@ -20,3 +36,4 @@ class Solution {
         return queue.size();
     }
 }
+
