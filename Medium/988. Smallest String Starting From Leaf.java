@@ -1,4 +1,4 @@
-class Solution {
+class Solution1 {
     private String res;
 
     public String smallestFromLeaf(TreeNode root) {
@@ -25,5 +25,30 @@ class Solution {
             travel(node.right, sb);
             sb.setLength(sb.length() - 1);
         }
+    }
+}
+
+class Solution2 {
+    private String res;
+
+    public String smallestFromLeaf(TreeNode root) {
+        travel(root, new StringBuilder());
+        return res;
+    }
+    private void travel(TreeNode node, StringBuilder sb) {
+        if (node == null) {
+            return;
+        }
+        sb.append((char) ('a' + node.val));
+        if (node.left == null && node.right == null) {
+            var cur = sb.reverse().toString();
+            if (res == null || cur.compareTo(res) < 0) {
+                res = cur;
+            }
+            sb.reverse();
+        }
+        travel(node.left, sb);
+        travel(node.right, sb);
+        sb.setLength(sb.length() - 1);
     }
 }
