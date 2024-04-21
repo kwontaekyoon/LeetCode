@@ -11,7 +11,7 @@ class Solution {
             }
         }
         
-        return list.toArray(new int[0][4]);
+        return list.toArray(new int[list.size()][]);
     }
 
     private void dfs(int[][] land, int R, int C, int r, int c, List<int[]> list) {
