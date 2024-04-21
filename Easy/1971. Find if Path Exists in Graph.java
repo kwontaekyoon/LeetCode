@@ -1,16 +1,22 @@
-class DFS {
+class Solution {
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         final var map = new HashMap<Integer, List<Integer>>();
         for (var e : edges) {
             map.computeIfAbsent(e[0], k -> new ArrayList<Integer>()).add(e[1]);
             map.computeIfAbsent(e[1], k -> new ArrayList<Integer>()).add(e[0]);
         }
+        // return dfs(map, source, destination);
+        // return bfs(map, source, destination);
+        return dijkstra(map, source, destination, n);
+    }
+
+    private boolean dfs(Map<Integer, List<Integer>> map, int S, int D) {
         final var visit = new HashSet<Integer>();
         final var stack = new ArrayDeque<Integer>();
-        stack.offerLast(source);
+        stack.offerLast(S);
         while (!stack.isEmpty()) {
             var curr = stack.pollLast();
-            if (curr == destination) {
+            if (curr == D) {
                 return true;
             }
             if (!visit.add(curr)) {
@@ -22,41 +28,42 @@ class DFS {
         }
         return false;
     }
-}
 
-class Dijkstra {
-    public boolean validPath(int n, int[][] edges, int source, int destination) {
-        final var graph = new HashMap<Integer, List<Integer>>();
-        for (var e : edges) {
-            graph.computeIfAbsent(e[0], k -> new ArrayList<>()).add(e[1]);
-            graph.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);
-        }
-        
-        final var distances = new int[n];
-        Arrays.fill(distances, Integer.MAX_VALUE);
-        distances[source] = 0;
-        
-        final var pq = new PriorityQueue<int[]>((a, b) -> a[0] - b[0]);
-        pq.offer(new int[] {0, source});
-        
-        while (!pq.isEmpty()) {
-            int[] current = pq.poll();
-            int currentDistance = current[0];
-            int currentNode = current[1];
-            
-            if (currentNode == destination) {
+    private boolean bfs(Map<Integer, List<Integer>> map, int S, int D) {
+        final var queue = new ArrayDeque<Integer>();
+        final var visit = new HashSet<Integer>();
+        queue.offer(S);
+        while (!queue.isEmpty()) {
+            var curr = queue.poll();
+            if (curr == D) {
                 return true;
             }
-            
-            if (currentDistance > distances[currentNode]) {
+            if (!visit.add(curr)) {
                 continue;
             }
-            
-            for (int neighbor : graph.getOrDefault(currentNode, new ArrayList<>())) {
-                int distance = currentDistance + 1; // Assuming unweighted graph
-                if (distance < distances[neighbor]) {
-                    distances[neighbor] = distance;
-                    pq.offer(new int[] {distance, neighbor});
+            for (var next : map.getOrDefault(curr, new ArrayList<>())) {
+                queue.offer(next);
+            }
+        }
+        return false;
+    }
+
+    private boolean dijkstra(Map<Integer, List<Integer>> map, int S, int D, int N) {
+        final var distances = new int[N];
+        Arrays.fill(distances, Integer.MAX_VALUE);
+        
+        final var pq = new PriorityQueue<int[]>((a, b) -> a[0] - b[0]);
+        pq.offer(new int[] {0, S});
+        distances[S] = 0;
+        while (!pq.isEmpty()) {
+            var curr = pq.poll();
+            if (curr[1] == D) {
+                return true;
+            }
+            for (int next : map.getOrDefault(curr[1], new ArrayList<>())) {
+                if (curr[0] + 1 < distances[next]) {
+                    pq.offer(new int[] { curr[0] + 1, next });
+                    distances[next] = curr[0] + 1;
                 }
             }
         }
