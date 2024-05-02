@@ -22,10 +22,15 @@ class UsingHashTable {
         final var set = new HashSet<Integer>();
         int max = -1;
         for (int num : nums) {
-            if (set.contains(-num)) {
-                max = Math.max(max, Math.abs(num));
+            int curr = Math.abs(num);
+            if (curr <= max) {
+                continue;
             }
-            set.add(num);
+            if (set.contains(-num)) {
+                max = Math.max(max, curr);
+            } else {
+                set.add(num);
+            }
         }
         return max;
     }
