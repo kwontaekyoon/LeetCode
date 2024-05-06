@@ -14,7 +14,6 @@ class Solution {
             while (!stack.isEmpty() && nums[stack.peekLast()] < nums[i]) {
                 res[stack.pollLast()] = nums[i];
             }
-            stack.offerLast(i);
         }
         return res;
     }
