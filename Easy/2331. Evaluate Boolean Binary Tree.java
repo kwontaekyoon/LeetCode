@@ -4,9 +4,9 @@ class Solution {
             default:
                 return root.val == 1;
             case 2:
-                return evaluateTree(root.left) | evaluateTree(root.right);
+                return evaluateTree(root.left) || evaluateTree(root.right);
             case 3:
-                return evaluateTree(root.left) & evaluateTree(root.right);
+                return evaluateTree(root.left) && evaluateTree(root.right);
         }
     }
 }
