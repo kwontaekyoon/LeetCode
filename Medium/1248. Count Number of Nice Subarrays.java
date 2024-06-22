@@ -1,6 +1,23 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
         final int N = nums.length;
+        final var cnt = new int[N + 1];
+        cnt[0] = 1;
+        int res = 0;
+        for (int i = 0, o = 0; i < N; i++) {
+            o += nums[i] % 2;
+            if (o >= k) {
+                res += cnt[o - k];
+            }
+            cnt[o]++;
+        }
+        return res;
+    }
+}
+
+class Solution1 {
+    public int numberOfSubarrays(int[] nums, int k) {
+        final int N = nums.length;
         final var odds = new ArrayList<Integer>();
         // lower bound
         odds.add(-1);
