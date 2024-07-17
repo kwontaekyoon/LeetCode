@@ -21,14 +21,14 @@ class Solution {
             } else {
                 prev.left = null;
             }
-            dfs(curr, curr.left, res, set, false, true);
-            dfs(curr, curr.right, res, set, true, true);
+            fatherDeleted = true;
         } else {
             if (fatherDeleted) {
                 res.add(curr);
             }
-            dfs(curr, curr.left, res, set, false, false);
-            dfs(curr, curr.right, res, set, true, false);
+            fatherDeleted = false;
         }
+        dfs(curr, curr.left, res, set, false, fatherDeleted);
+        dfs(curr, curr.right, res, set, true, fatherDeleted);
     }
 }
