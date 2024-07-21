@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
     public List<Integer> luckyNumbers(int[][] matrix) {
         final var res = new ArrayList<Integer>();
