@@ -21,7 +21,6 @@ class Solution {
 
 class Solution1 {
     public int[] sortArray(int[] nums) {
-        final int n = nums.length;
         int upperBound = Integer.MIN_VALUE;
         int lowerBound = Integer.MAX_VALUE;
         for (int num : nums) {
