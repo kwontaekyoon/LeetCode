@@ -34,7 +34,7 @@ class Solution {
     }
 }
 
-// O(n ^ 2)
+// O(n * log(n))
 class Sorting {
     public int findMinDifference(List<String> timePoints) {
         final int n = timePoints.size();
