@@ -8,7 +8,6 @@ class Solution {
         for (char c : s1.toCharArray()) {
             freq1[c - 'a']++;
         }
-        int streak = 0;
         char[] chars = s2.toCharArray();
         int[] freq2 = new int[26];
         for (int i = 0; i < n; i++) {
