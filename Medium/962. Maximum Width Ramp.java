@@ -11,7 +11,6 @@ class Solution {
                 stack.offerLast(i);
             }
         }
-        System.out.println(stack);
         int res = 0;
         for (int i = n - 1; i > 0; i--) {
             while (!stack.isEmpty() && nums[stack.peekLast()] <= nums[i]) {
