@@ -13,7 +13,7 @@ class SortingSlidingWindow:
             res = max(res, right - left + 1)
         return res
 
-class TLE:
+class BF_TLE:
     def maximumBeauty(self, nums: List[int], k: int) -> int:
         res = 0
         cnt = Counter()
