@@ -15,3 +15,13 @@ class Solution:
                 continue
             res += len(set(s[v[0]+1:v[1]]))
         return res
+    
+class Optimized:
+    def countPalindromicSubsequence(self, s: str) -> int:
+        first_and_last = defaultdict(list)
+        for i in range(len(s)):
+            first_and_last[s[i]].append(i)
+        res = 0
+        for k, v in first_and_last.items():
+            res += len(set(s[v[0]+1:v[-1]]))
+        return res
