@@ -1,18 +1,24 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Trie {
 
     class Node {
         boolean eow;
         Node children[];
+
         Node() {
             children = new Node[27];
         }
     }
 
     Node root;
+
     Trie() {
         root = new Node();
     }
-    
+
     public void insert(String s) {
         Node curr = root;
         for (char ch : s.toCharArray()) {
@@ -28,10 +34,10 @@ class Trie {
         curr = curr.children[26] = new Node();
         curr.eow = true;
     }
-    
-    public boolean search(String s){
+
+    public boolean search(String s) {
         Node curr = root;
-        for (char ch : s.toCharArray()){
+        for (char ch : s.toCharArray()) {
             int idx = ch - 'a';
             if (ch == '/') {
                 idx = 26;
