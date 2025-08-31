@@ -1,7 +1,42 @@
 from typing import List
 
-
 class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        rows = [{1, 2, 3, 4, 5, 6, 7, 8, 9} for _ in range(9)]
+        cols = [{1, 2, 3, 4, 5, 6, 7, 8, 9} for _ in range(9)]
+        boxs = [[{1, 2, 3, 4, 5, 6, 7, 8, 9} for _ in range(3)] for _ in range(3)]
+        for r in range(9):
+            for c in range(9):
+                if board[r][c] == '.':
+                    continue
+                num = int(board[r][c])
+                rows[r].remove(num)
+                cols[c].remove(num)
+                boxs[r // 3][c // 3].remove(num)
+        def backtrack(r: int, c: int) -> bool:
+            if r == 9:
+                return True
+            if c == 9:
+                return backtrack(r + 1, 0)
+            if board[r][c] != '.':
+                return backtrack(r, c + 1)
+            nums = rows[r] & cols[c] & boxs[r // 3][c // 3]
+            for num in nums:
+                board[r][c] = str(num)
+                rows[r].remove(num)
+                cols[c].remove(num)
+                boxs[r // 3][c // 3].remove(num)
+                if backtrack(r, c + 1):
+                    return True
+                board[r][c] = '.'
+                rows[r].add(num)
+                cols[c].add(num)
+                boxs[r // 3][c // 3].add(num)
+            return False
+        backtrack(0, 0)
+        
+        
+class Solution1:
     def solveSudoku(self, board: List[List[str]]) -> None:
         rows = [set() for _ in range(9)]
         cols = [set() for _ in range(9)]
