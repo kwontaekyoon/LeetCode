@@ -17,7 +17,7 @@ class Solution:
             heappush(boundary, (height[0][c], 0, c))
             heappush(boundary, (height[-1][c], R - 1, c))
             height[0][c] = height[-1][c] = -1
-        res, water_level = 0, 0
+        res = water_level = 0
         while boundary:
             h, r, c = heappop(boundary)
             water_level = max(water_level, h)
