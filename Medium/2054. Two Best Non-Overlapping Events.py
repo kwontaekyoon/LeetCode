@@ -1,7 +1,21 @@
 from bisect import bisect_right
+import heapq
 from typing import List
 
-
+class SortingWithHeap:
+    def maxTwoEvents(self, events: List[List[int]]) -> int:
+        events.sort(key = lambda x: x[0])
+        heap = []
+        max_prev_value = 0
+        max_two_events = 0
+        for start, end, value in events:
+            while heap and heap[0][0] < start:
+                _, prev_value = heapq.heappop(heap)
+                max_prev_value = max(max_prev_value, prev_value)
+            max_two_events = max(max_two_events, value + max_prev_value)
+            heapq.heappush(heap, (end, value))
+        return max_two_events
+    
 class Opitimized:
     def maxTwoEvents(self, events: List[List[int]]) -> int:
         max_weights = [0]
