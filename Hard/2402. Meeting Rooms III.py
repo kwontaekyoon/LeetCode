@@ -2,6 +2,33 @@ import heapq
 from typing import List
 
 
+class Solution:
+    def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
+        meetings.sort(key = lambda x: x[0])
+        used = [0] * n
+        rooms = list(range(n))
+        heapq.heapify(rooms)
+        busy = []
+        for start, end in meetings:
+            while busy and busy[0][0] <= start:
+                _, room = heapq.heappop(busy)
+                heapq.heappush(rooms, room)
+            if rooms:
+                room = heapq.heappop(rooms)
+                used[room] += 1
+                heapq.heappush(busy, (end, room))
+            else:
+                time = end - start
+                end_time,room = heapq.heappop(busy)
+                heapq.heappush(busy, (end_time + time,room))
+                used[room] += 1
+        max_room = max_used = 0
+        for room, cnt in enumerate(used):
+            if cnt > max_used:
+                max_room = room
+                max_used = cnt
+        return max_room
+
 class Optimized:
     def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
         meetings.sort()
