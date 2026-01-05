@@ -1,6 +1,20 @@
 from typing import List
 
 
+class Solution1:
+    def maxMatrixSum(self, matrix: List[List[int]]) -> int:
+        smallest_abs = 100000
+        negs = 0
+        result = 0
+        for row in matrix:
+            for num in row:
+                smallest_abs = min(smallest_abs, abs(num))
+                if num > 0:
+                    result += num
+                else:
+                    negs += 1
+                    result -= num
+        return result if negs % 2 == 0 else result - smallest_abs * 2
 class Solution:
     def maxMatrixSum(self, matrix: List[List[int]]) -> int:
         sum = 0
