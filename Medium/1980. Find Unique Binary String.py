@@ -3,7 +3,7 @@ from typing import List
 
 class String:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        return ''.join('0' if n[i] == '1' else '1' for i, n in enumerate(nums))
+        return ''.join('1' if num[i] == '0' else '0' for i, num in enumerate(nums))
 
 class HashTable:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
@@ -13,3 +13,4 @@ class HashTable:
             if i not in unique_nums:
                 res = str(bin(i))[2:]
                 return '0' * (len(nums[0]) - len(res)) + res
+        return ''
